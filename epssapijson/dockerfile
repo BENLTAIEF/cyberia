@@ -11,4 +11,3 @@ COPY main.py .
 VOLUME ["/app/output"]
  
 ENTRYPOINT ["python", "main.py"]
-CMD ["--output", "/app/output/epss_full.csv", "--limit", "10000", "--concurrency", "5"]
