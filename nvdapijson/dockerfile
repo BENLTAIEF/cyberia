@@ -1,0 +1,23 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create /data directory for volume mount
+RUN mkdir -p /data
+
+# Set environment variable defaults (sensitive data like NVD_API_KEY passed at runtime)
+ENV OUTPUT_DIR="/data" \
+    START_YEAR="2025" \
+    START_MONTH="1" \
+    SEVERITY=""
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY main.py .
+
+CMD ["python", "main.py"]

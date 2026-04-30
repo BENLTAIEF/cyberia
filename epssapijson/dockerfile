@@ -1,0 +1,14 @@
+FROM python:3.12-slim
+ 
+WORKDIR /app
+ 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+ 
+COPY main.py .
+ 
+# Dossier de sortie monté en volume
+VOLUME ["/app/output"]
+ 
+ENTRYPOINT ["python", "main.py"]
+CMD ["--output", "/app/output/epss_full.csv", "--limit", "10000", "--concurrency", "5"]
