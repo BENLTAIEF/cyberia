@@ -1,2 +1,4 @@
 .DS_Store
 .vscode
+nvdapijson/cve_references_nvd.csv
+*.csv
